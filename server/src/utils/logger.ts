@@ -15,7 +15,7 @@ addColors({
 });
 
 const logger = winston.createLogger({
-	level: "verbose",
+	level: process.env.LOGGER_LEVEL || "warn",
 	levels: levels,
 	format: winston.format.combine(
 		winston.format.metadata(),
