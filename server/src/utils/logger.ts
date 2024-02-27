@@ -8,7 +8,7 @@ const levels = {
 };
 
 addColors({
-	info: "bold cyan",
+	info: "bold white",
 	warn: "italic yellow",
 	error: "bold red",
 	verbose: "white",

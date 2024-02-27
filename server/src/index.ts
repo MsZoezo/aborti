@@ -1,12 +1,13 @@
 import express, { Express, Request, Response } from "express";
-import { Logger } from "./utils/logger";
 import "dotenv/config"
+import { Logger } from "./utils/logger";
+import v1 from "./v1";
 
 const logger = new Logger("Index")
 
 const app: Express = express();
 const port = Number(process.env.EXPRESS_PORT) || 8000;
 
-app.get("", (req: Request, res: Response) => res.send("Hello world!"));
+app.use("/v1", v1);
 
 app.listen(port, () => logger.info(`Listening on http://localhost:${port}/`));
