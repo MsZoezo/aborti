@@ -1,6 +1,8 @@
 import { Request, Response, Router } from "express"
 import { Message } from "../../database/database"
 import { body, validationResult, param } from "express-validator"
+import { Logger } from "../../utils/logger";
+import { DataTypes, Op, Sequelize } from "sequelize";
 
 const router = Router();
 
@@ -36,11 +38,32 @@ router.get("/:uuid",
 
         if(!message) return res.status(400).send({ success: false }) // This should literally never happen cause we already checked using the validator but..
 
-        message.read = true;
-        message.save();
+        if(!message.read) {
+            message.read = true;
+            message.readAt = Date.now();
+
+            message.save();    
+        }
 
         res.status(200).send({ success: true, data: message!})
     }
 );
+
+const logger = new Logger("Cronjob")
+
+// We delete read ones after 5 minutes
+setInterval(async () => {
+    logger.verbose("Checking for read messages to delete.");
+    const amount = await Message.destroy({
+        where: {
+            read: true,
+            readAt: {
+                [Op.gte]: Sequelize.literal("date('now', '-5 minutes')"), 
+            }
+        }
+    });
+
+    if(amount > 0) logger.verbose(`Deleted ${amount} read messages.`);
+}, 60_000);
 
 export default router;

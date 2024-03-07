@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    
+    box-sizing: border-box;
+
+    scroll-behavior: smooth;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 2rem;
+
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style-type: none;
+}

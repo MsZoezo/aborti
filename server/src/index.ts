@@ -3,7 +3,7 @@ import "dotenv/config"
 import { Logger } from "./utils/logger";
 import v1 from "./v1";
 
-const logger = new Logger("Index")
+const logger = new Logger("Index");
 
 const app: Express = express();
 const port = Number(process.env.EXPRESS_PORT) || 8000;

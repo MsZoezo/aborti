@@ -7,6 +7,7 @@ export class Message extends Model<InferAttributes<Message>, InferCreationAttrib
     declare message: string;
 
     declare read: CreationOptional<boolean>;
+    declare readAt: CreationOptional<number>;
 }
 
 export default (sequelize: Sequelize): ModelStatic<Message> => {
@@ -24,11 +25,14 @@ export default (sequelize: Sequelize): ModelStatic<Message> => {
             read: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
+            },
+
+            readAt: {
+                type: DataTypes.DATE,
+                defaultValue: null
             }
         },
         {
-            createdAt: true,
-            updatedAt: true,
             sequelize,
         });
 }

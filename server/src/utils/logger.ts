@@ -8,10 +8,10 @@ const levels = {
 };
 
 addColors({
-	info: "bold white",
+	info: "bold blue",
 	warn: "italic yellow",
 	error: "bold red",
-	verbose: "white",
+	verbose: "black",
 });
 
 const logger = winston.createLogger({
